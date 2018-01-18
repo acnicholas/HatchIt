@@ -4,25 +4,38 @@
     Title="Hatchit"
     Height="300"
     Width="300">
-    <Grid>
+    <DockPanel>
+        <Menu x:Name="menu" DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" Command="{Binding ClickCommand}"/>
+                <MenuItem Header="_Close"/>
+                <MenuItem Header="_Save"/>
+            </MenuItem>
+        </Menu>
+        <Grid Height="Auto" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Left" />
+            <ListView x:Name="hatchList" ItemsSource="{Binding LoadedHatches}" Height="Auto" VerticalAlignment="Stretch" Width="Auto" Grid.Column="0"/>
+            <ItemsControl ItemsSource="{Binding Lines}" Grid.Column="1" Grid.Row="0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas
+                            Width="Auto"
+                            Height="Auto"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="0"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            x:Name="MyCanvas" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </Grid>
+        
 
-            <ItemsControl ItemsSource="{Binding Lines}">
-            <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-            <Canvas
-            Width="Auto"
-            Height="Auto"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Margin="0"
-            Grid.Column="0"
-            Grid.Row="0"
-            x:Name="MyCanvas" />
-            </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
-
-        <Button Command="{Binding ClickCommand}" Width="100" Height="100" Content="wefwfwef"/>
-
-    </Grid>
+    </DockPanel>
 </Window>

@@ -60,10 +60,24 @@ namespace Hatchit
             Offset = offset;
             DashSpaceArray = new DoubleCollection();   
         }
-        
-        public Line(string lineDefinition)
-        {
 
+        public Line(string delimitedString)
+        {
+            double[] nums = Array.ConvertAll(delimitedString.Split(','), double.Parse);
+            Rotation = nums[0];
+            XOrigin = nums[1];
+            YOrigin = nums[2];
+            Shift = nums[3];
+            Offset = nums[4];
+            DashSpaceArray = new DoubleCollection();
+            for (int i = 5; i < nums.Length; i++) {
+                DashSpaceArray.Add(nums[i]);
+            }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0},{1},{2},{3},{4}", Rotation, XOrigin, YOrigin, Shift, Offset);
         }
     }
 }

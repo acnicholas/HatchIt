@@ -18,6 +18,7 @@ namespace Hatchit
     {
         private bool canExecute;
         private Hatch hatch;
+        public List<Hatch> loadedHatches;
         private ICommand clickCommand;
         private ObservableCollection<System.Windows.Shapes.Line> lines;
 
@@ -39,6 +40,22 @@ namespace Hatchit
             }
         }
 
+        public List<Hatch> LoadedHatches
+        {
+            get
+            {
+                return this.loadedHatches;
+            }
+            set
+            {
+                if (value != this.loadedHatches)
+                {
+                    this.loadedHatches = value;
+                    InvokePropertyChanged("LoadedHatches");
+                }
+            }
+        }
+
         public ICommand ClickCommand
         {
             get
@@ -56,8 +73,10 @@ namespace Hatchit
         {
             canExecute = true;
             this.hatch = new Hatch();
+            this.loadedHatches = new List<Hatch>();
+            loadedHatches.Add(new Hatch("Hatch Test 1"));
+            loadedHatches.Add(new Hatch("Hatch Test 2"));
             lines = new ObservableCollection<System.Windows.Shapes.Line>();
-            //lines.Add(TestLine());
         }
 
         private void InvokePropertyChanged(string propertyName)
@@ -69,6 +88,23 @@ namespace Hatchit
         }
 
         private System.Windows.Shapes.Line TestLine()
+        {
+            //100 horizontal spacing
+            string def = "0,100,100,600,600";
+            var line = new Line(def);
+            System.Diagnostics.Debug.WriteLine(line);
+            var testLine = new System.Windows.Shapes.Line();
+            testLine.Visibility = System.Windows.Visibility.Visible;
+            testLine.StrokeThickness = 4;
+            testLine.Stroke = System.Windows.Media.Brushes.Black;
+            testLine.X1 = line.XOrigin;
+            testLine.X2 = line.Shift;
+            testLine.Y1 = line.YOrigin;
+            testLine.Y2 = line.Offset;
+            return testLine;
+        }
+
+        private System.Windows.Shapes.Line TestLine2()
         {
             DoubleCollection dashArray = new DoubleCollection();
             dashArray.Add(10);
