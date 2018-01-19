@@ -19,8 +19,6 @@ namespace Hatchit
         public Window1()
         {
             InitializeComponent();
-            ViewModel viewModel = new ViewModel();
-            this.DataContext = viewModel;
         }
    
     }
